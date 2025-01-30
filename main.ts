@@ -4,7 +4,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./gpl/schema.ts"
 import { resolvers } from "./resolvers/resolvers.ts"
 import { contactModel } from "./type.ts";
-
+/*
 const MONGO_URL = Deno.env.get("MONGO_URL");
 const API_KEY = Deno.env.get("API_KEY");
 if (!MONGO_URL) {
@@ -33,3 +33,26 @@ const { url } = await startStandaloneServer(server, {
   context: async () => ({ contactCollection }), listen: { port: 5000 }
 });
 console.info(`Server ready at ${url}`);
+*/
+
+//API REST
+async function handler(req: Request):Promise<Response> {
+  const metodo = req.method
+  const url = new URL(req.url)
+  const path = url.pathname
+
+  if(metodo === "GET"){
+    if(path === "/test"){
+      return new Response("Hola")
+    }
+  } else if(metodo === "POST"){
+    
+  } else if(metodo === "PUT"){
+
+  } else if(metodo === "DELETE"){
+
+  }
+  return new Response("Method not found",{status: 404})
+}
+
+Deno.serve({port: 8080},handler)
