@@ -1,10 +1,10 @@
-import { MongoClient } from "mongodb";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./gpl/schema.ts"
-import { resolvers } from "./resolvers/resolvers.ts"
-import { contactModel } from "./type.ts";
-/*
+import { MongoClient } from "mongodb";
+import { typeDefs } from "./gpl/schema.ts";
+import { resolvers } from "./resolvers/resolvers.ts";
+import { restaurantModel } from "./type.ts";
+
 const MONGO_URL = Deno.env.get("MONGO_URL");
 const API_KEY = Deno.env.get("API_KEY");
 if (!MONGO_URL) {
@@ -19,9 +19,9 @@ if (!API_KEY) {
 const client = new MongoClient(MONGO_URL);
 await client.connect();
 console.log("Connected to the dabase")
-const db = client.db("practica8")
-const contactCollection = db.collection<contactModel>("userModel");
+const db = client.db("finalValero")
 
+const contactCollection = db.collection<restaurantModel>("restaurantModel");
 
 
 const server = new ApolloServer({
@@ -33,26 +33,27 @@ const { url } = await startStandaloneServer(server, {
   context: async () => ({ contactCollection }), listen: { port: 5000 }
 });
 console.info(`Server ready at ${url}`);
-*/
 
-//API REST
-async function handler(req: Request):Promise<Response> {
-  const metodo = req.method
-  const url = new URL(req.url)
+
+/*
+async function handler(request: Request): Promise<Response> {
+  const metodo = request.method
+  const url = new URL(request.url)
   const path = url.pathname
 
-  if(metodo === "GET"){
+  if (metodo === "GET") {
     if(path === "/test"){
-      return new Response("Hola")
+      return new Response(JSON.stringify("Hola"), { status: 200})
     }
-  } else if(metodo === "POST"){
-    
-  } else if(metodo === "PUT"){
+  } else if (metodo === "POST") {
+   
+  } else if (metodo === "PUT") {
 
-  } else if(metodo === "DELETE"){
+  } else if (metodo === "DELETE") {
 
   }
-  return new Response("Method not found",{status: 404})
+  return new Response("Method not found", { status: 404 })
 }
 
-Deno.serve({port: 8080},handler)
+Deno.serve({ port: 8080 }, handler)
+*/
